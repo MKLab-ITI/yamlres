@@ -11,7 +11,9 @@ def pipeline(*args):
 class Runner:
     def __init__(self, trust: list = None, global_methods=None):
         self.trust = None if trust is None else set(trust)
-        self.global_methods = {"pipeline": pipeline} if global_methods is None else global_methods
+        self.global_methods = (
+            {"pipeline": pipeline} if global_methods is None else global_methods
+        )
 
     def get(self, values: dict, name):
         if isinstance(name, str) and "." in name:
@@ -37,12 +39,15 @@ class Runner:
         if not isinstance(args, list):
             args = [args]
         args = [self.get(values, v) for v in args]
-        kwargs = {k: self.get(values, v) for k, v in specs.get("kwargs", dict()).items()}
+        kwargs = {
+            k: self.get(values, v) for k, v in specs.get("kwargs", dict()).items()
+        }
         return method(*args, **kwargs)
 
     def init(self, specs):
         def runner(**values):
             return self.run(specs, **values)
+
         return runner
 
     def run(self, specs, **values):
@@ -65,13 +70,21 @@ class Runner:
                 elif key == "import":
                     for name, lib in value.items():
                         if self.trust is not None and lib not in self.trust:
-                            raise Exception("Trying to import a non-trusted library: "+lib+" (should be in {"+",".join(self.trust)+"})")
+                            raise Exception(
+                                "Trying to import a non-trusted library: "
+                                + lib
+                                + " (should be in {"
+                                + ",".join(self.trust)
+                                + "})"
+                            )
                         if name in values:
                             continue
                             # raise Exception("Import name "+str(name)+" already in use")
                         values[name] = __import__(lib)
                 elif key == "assign" or key == "return":
-                    if key == "return" and (not isinstance(value, dict) or "method" in value):
+                    if key == "return" and (
+                        not isinstance(value, dict) or "method" in value
+                    ):
                         value = {"": value}
                     for name, val in value.items():
                         if name in values:
@@ -86,7 +99,11 @@ class Runner:
                         if key == "return":
                             results[name] = values[name]
                 else:
-                    raise Exception("Invalid command: "+key+" (should be in {definitions, import, assign, get, method, args, kwargs})")
+                    raise Exception(
+                        "Invalid command: "
+                        + key
+                        + " (should be in {definitions, import, assign, get, method, args, kwargs})"
+                    )
         else:
             raise Exception("Can only run a list or dict")
         return results

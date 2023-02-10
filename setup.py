@@ -10,7 +10,7 @@ with open("README.md", "r") as file:
 
 setuptools.setup(
     name='yamlres',
-    version='0.0.1',
+    version='0.1.0',
     author="Emmanouil (Manios) Krasanakis",
     author_email="maniospas@hotmail.com",
     description="A yaml-based declarative programming interface",
