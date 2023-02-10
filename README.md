@@ -3,7 +3,7 @@ This project extends the *yaml* prototype with web-based resource fields
 and creates a declarative algorithm interface.
 
 **Development:** Emmanouil (Manios) Krasanakis<br>
-**Dependencies:** `pyyaml`
+**Dependencies:** `pyyaml`,`wget`
 
 ## Loading yaml from the web
 `yamlres` parses normal *yaml* files, but also goes through their fields
