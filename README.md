@@ -103,7 +103,7 @@ algorithm = Runner(trust=["pygrank"]).init(specs)
 
 </details>
 
-### set
+**assign**
 This is a dictionary of value assignments. If the assignment
 is a dictionary and it has a *method* field, then the respective
 method is called based on the optional *args* and *kwargs* fields. For
@@ -163,7 +163,7 @@ print(algorithm(priors=..., alpha=0.9))
 
 </details>
 
-### return
+**return**
 This declares either a single value or a dicitionary of values
 to return when your defined algorithm is run.
 
