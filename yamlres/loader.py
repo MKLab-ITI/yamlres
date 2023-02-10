@@ -41,7 +41,7 @@ class Loader:
                 raise Exception("Recursive reference of resource: "+node)
             node = self.load(node, exclude)
             if len(parts) >= 2:
-                for part in parts[1:]:
+                for part in parts[1].split("."):
                     node = node[part]
             return node
         if isinstance(node, list):

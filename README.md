@@ -33,17 +33,16 @@ print(Loader(resource+".import"))
     <summary>Resource accessing within yaml</summary>
 Let's see now how accessing a resource can look like from within 
 a different yaml file. This example will create a variation
-of examples/ppr.yaml that references parts of the latter:
+of examples/ppr.yaml (you could also use the respective URL
+in place of that file name) that references parts of the latter:
 
 ```yaml
-definitions: # put any yaml definitions in here to reuse within the file
-  - define: &resource https://raw.githubusercontent.com/maniospas/yamlres/main/examples/ppr.yaml
-import: *resource .import
+import: examples/ppr.yaml.import
 set:
     ranker:
       method: pg.HeatKernel
-      kwargs: {alpha: alpha}
-    posteriors: *resource .posteriors
+      args: 3
+    posteriors: examples/ppr.yaml.set.posteriors
 return: posteriors
 ```
 

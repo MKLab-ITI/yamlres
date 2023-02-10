@@ -1,9 +1,7 @@
-definitions: # put any yaml definitions in here to reuse within the file
-  - define: &resource https://raw.githubusercontent.com/maniospas/yamlres/main/examples/ppr.yaml
-import: *resource .import
+import: https://raw.githubusercontent.com/maniospas/yamlres/main/examples/ppr.yaml.import
 set:
     ranker:
       method: pg.HeatKernel
-      kwargs: {alpha: alpha}
-    posteriors: *resource .posteriors
+      args: 3
+    posteriors: https://raw.githubusercontent.com/maniospas/yamlres/main/examples/ppr.yaml.set.posteriors
 return: posteriors
