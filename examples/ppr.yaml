@@ -1,0 +1,15 @@
+---
+  import:
+    pg: pygrank
+  set:
+    alpha: 0.85
+    ranker:
+      method: pg.PageRank
+      kwargs: {alpha: alpha}
+    posteriors:
+      method: pipeline
+      args:
+        - priors
+        - ranker
+        - method: pg.Normalize
+  return: posteriors
