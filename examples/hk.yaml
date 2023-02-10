@@ -1,7 +1,7 @@
 import: https://raw.githubusercontent.com/maniospas/yamlres/main/examples/ppr.yaml.import
-set:
+assign:
     ranker:
       method: pg.HeatKernel
       args: 3
-    posteriors: https://raw.githubusercontent.com/maniospas/yamlres/main/examples/ppr.yaml.set.posteriors
+    posteriors: https://raw.githubusercontent.com/maniospas/yamlres/main/examples/ppr.yaml.assign.posteriors
 return: posteriors

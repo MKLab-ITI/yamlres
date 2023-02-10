@@ -70,7 +70,7 @@ class Runner:
                             continue
                             # raise Exception("Import name "+str(name)+" already in use")
                         values[name] = __import__(lib)
-                elif key == "set" or key == "return":
+                elif key == "assign" or key == "return":
                     if key == "return" and (not isinstance(value, dict) or "method" in value):
                         value = {"": value}
                     for name, val in value.items():
@@ -78,7 +78,7 @@ class Runner:
                             if key == "return":
                                 results[name] = values[name]
                             continue
-                            # raise Exception("Cannot set name "+str(name)+" already in use")
+                            # raise Exception("Cannot assign name "+str(name)+" already in use")
                         if isinstance(val, dict):
                             values[name] = self.exec(val, values)
                         else:
@@ -86,7 +86,7 @@ class Runner:
                         if key == "return":
                             results[name] = values[name]
                 else:
-                    raise Exception("Invalid command: "+key+" (should be in {definitions, import, set, get, method, args, kwargs})")
+                    raise Exception("Invalid command: "+key+" (should be in {definitions, import, assign, get, method, args, kwargs})")
         else:
             raise Exception("Can only run a list or dict")
         return results

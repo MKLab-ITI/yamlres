@@ -38,11 +38,11 @@ in place of that file name) that references parts of the latter:
 
 ```yaml
 import: examples/ppr.yaml.import
-set:
+assign:
     ranker:
       method: pg.HeatKernel
       args: 3
-    posteriors: examples/ppr.yaml.set.posteriors
+    posteriors: examples/ppr.yaml.assign.posteriors
 return: posteriors
 ```
 
@@ -75,11 +75,11 @@ print(algorithm(kwarg1=..., kwarg2=...))
 
 The following dictionary fields are allowed in algorithm definitions:
 
-### definitions
-Place you *yaml* anchor definitions here. No additional processing
-takes place for these.
+**definitions**
+Place any *yaml* anchor definitions here. No additional processing
+takes place for these .
 
-### import
+**import**
 This is a dictionary from aliases to respective libraries. You can use methods
 of imported libraries in your definitions. For example, the expression
 `import libraryname as lib` is converted to `yamlres` format to the following
@@ -111,7 +111,7 @@ example, to call a method and assign the returned value to a
 variable, you can call:
 
 ```yaml
-set:
+assign:
   variablename:
     method: methodname
     args: [arg1, arg2]
@@ -132,7 +132,7 @@ which is automatically provided. This starts from an input and calls
 each consequent methods
 
 ```yaml
-set:
+assign:
   output:
       ranker:
         ...
