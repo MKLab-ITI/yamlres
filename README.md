@@ -128,20 +128,50 @@ programmatically override those afterwards.
 <details>
     <summary>Functional pipeline</summary>
 You can define a functional pipeline by calling the namesake method,
-which is automatically provided. This starts from an input and calls
+of the yaml.functional module. This starts from an input and calls
 each consequent methods
 
 ```yaml
+import:
+  func: yamlres.functional
 assign:
   output:
-      ranker:
-        ...
-      method: pipeline
-      args:
-        - input
-        - methodname
-        - method: MethodBuilder1
-        - method: MethodBuilder2
+    method: func.builder
+    args:
+      - input
+      - methodname
+      - method: MethodBuilder1
+      - method: MethodBuilder2
+```
+</details>
+
+
+<details>
+    <summary>Method builders</summary>
+You can define a method builder by calling the namesake method,
+of the yaml.functional module. This starts from a method and
+arguments to override, and fills in the required ones later.
+Mostly this is used to generate the equivalents of
+lambda expressions for methods that require other methods 
+as inputs:
+
+```yaml
+import:
+  func: yamlres.functional
+assign:
+  methodvariation:
+    method: func.builder
+    args: basemethod
+    kwargs: 
+      kwarg1: value1
+      kwarg2: value2
+  output:
+    method: func.pipeline
+    args:
+      - input
+      - methodvariation  # will call basemethod(input, kwarg1=value1, kwarg2=value2)
+      - method: MethodBuilder1
+      - method: MethodBuilder2
 ```
 </details>
 

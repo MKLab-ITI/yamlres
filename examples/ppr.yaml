@@ -1,12 +1,13 @@
 import:
   pg: pygrank
+  func: yamlres.functional
 assign:
   alpha: 0.85
   ranker:
     method: pg.PageRank
     kwargs: {alpha: alpha}
   posteriors:
-    method: pipeline
+    method: func.pipeline
     args:
       - priors
       - ranker

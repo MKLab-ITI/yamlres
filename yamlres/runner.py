@@ -1,19 +1,10 @@
-import warnings
-
-
-def pipeline(*args):
-    arg = args[0]
-    for step in args[1:]:
-        arg = step(arg)
-    return arg
+import importlib
 
 
 class Runner:
-    def __init__(self, trust: list = None, global_methods=None):
-        self.trust = None if trust is None else set(trust)
-        self.global_methods = (
-            {"pipeline": pipeline} if global_methods is None else global_methods
-        )
+    def __init__(self, trust: list = None, globals=None):
+        self.trust = None if trust is None else set(list(trust)+["yamlres.functional"])
+        self.globals = dict() if globals is None else globals
 
     def get(self, values: dict, name):
         if isinstance(name, str) and "." in name:
@@ -31,7 +22,7 @@ class Runner:
     def exec(self, specs, values: dict = None):
         assert isinstance(specs, dict)
         values = dict() if values is None else values
-        for k, v in self.global_methods.items():
+        for k, v in self.globals.items():
             if k not in values:
                 values[k] = v
         method = self.get(values, specs["method"])
@@ -80,7 +71,7 @@ class Runner:
                         if name in values:
                             continue
                             # raise Exception("Import name "+str(name)+" already in use")
-                        values[name] = __import__(lib)
+                        values[name] = importlib.import_module(lib)
                 elif key == "assign" or key == "return":
                     if key == "return" and (
                         not isinstance(value, dict) or "method" in value
