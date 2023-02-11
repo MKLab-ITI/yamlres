@@ -1,6 +1,12 @@
 # yamlres
+
+*Retrieving algorithm component combinations from online (or local) yaml resources.*
+
 This project extends the *yaml* prototype with web-based resource fields
-and creates a declarative algorithm interface.
+and creates a declarative algorithm interface. This can help share algorithms
+based on existing *Python* libraries via a continuous deployment pipeline
+where you only update web resources. Thus, it separates algorithm declarations
+based on your components from component update cycles.
 
 **Development:** Emmanouil (Manios) Krasanakis<br>
 **Dependencies:** `pyyaml`,`wget`
