@@ -5,8 +5,8 @@
 This project extends the *yaml* prototype with web-based resource fields
 and creates a declarative algorithm interface. This can help share algorithms
 based on existing *Python* libraries via a continuous deployment pipeline
-where you only update web resources. Thus, it separates algorithm declarations
-based on your components from component update cycles.
+where you only update web resources. Thus, algorithm declarations are
+are separated from the update cycles of building components.
 
 **Development:** Emmanouil (Manios) Krasanakis<br>
 **Dependencies:** `pyyaml`,`wget`
@@ -31,7 +31,7 @@ You can also access fields within yaml file dicts as if they were loaded objects
 For example, you can access the *import* field of the above file by loading:
 
 ```python
-print(Loader(resource+".import"))
+print(Loader().load(resource+".import"))
 # {'pg': 'pygrank'}
 ```
 
@@ -142,7 +142,7 @@ import:
   func: yamlres.functional
 assign:
   output:
-    method: func.builder
+    method: func.pipeline
     args:
       - input
       - methodname

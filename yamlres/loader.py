@@ -24,6 +24,8 @@ class Loader:
             download_path = os.path.join(self.path, resource[8:])
             os.makedirs(".".join(download_path.split(".")[:-1]), exist_ok=True)
             if not os.path.exists(download_path) or self.update:
+                if os.path.exists(download_path):
+                    os.remove(download_path)
                 wget.download(resource, download_path)
             resource = download_path
         with open(resource, "r") as file:
