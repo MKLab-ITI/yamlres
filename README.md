@@ -5,7 +5,7 @@
 This project extends the *yaml* prototype with web-based resource fields
 and creates a declarative algorithm interface. This can help share algorithms
 based on existing *Python* libraries via a continuous deployment pipeline
-where you only update web resources. Thus, algorithm declarations are
+where you only update web resources. Thus, algorithm declarations
 are separated from the update cycles of building components.
 
 **Development:** Emmanouil (Manios) Krasanakis<br>
@@ -13,7 +13,7 @@ are separated from the update cycles of building components.
 
 ## Loading yaml from the web
 `yamlres` parses normal *yaml* files, but also goes through their fields
-in search of strings with containing the *.yaml* file extension and recursively
+in search of strings containing the *.yaml* file extension and recursively
 replaces such fields from files. Recursive loading throws an exception.
 You can reference online web resources to automatically download and parse.
 
