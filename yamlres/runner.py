@@ -17,6 +17,10 @@ class Runner:
             name = values[name]
         if isinstance(name, dict) and "method" in name:
             return self.exec(name, values)
+        if isinstance(name, list):
+            return [self.get(values, v) for v in name]
+        if isinstance(name, dict):
+            return {k: self.get(values, v) for k, v in name.items()}
         return name
 
     def exec(self, specs, values: dict = None):
